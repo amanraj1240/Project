@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 # ==================== CONFIG =====================
 YOUR_API_KEYS = ["GOKU"]
-TARGET_API = "https://numberinfoanshapi.api-e3a.workers.dev/"
+TARGET_API = "https://ravan-lookup.vercel.app/api"
+UPSTREAM_KEY = "Ravan"   # upstream api key
 CACHE_TIME = 3600  # seconds
 # ================================================
 
@@ -64,7 +65,14 @@ def number_api():
         return jsonify(cached["data"])
 
     try:
-        r = requests.get(f"{TARGET_API}?num={number}", timeout=10)
+        params = {
+            "key": UPSTREAM_KEY,
+            "type": "mobile",
+            "term": number
+        }
+
+        r = requests.get(TARGET_API, params=params, timeout=10)
+
         if r.status_code != 200:
             return jsonify({"error": "upstream failed"}), 502
 
@@ -75,7 +83,7 @@ def number_api():
         except Exception:
             data = {"result": r.text}
 
-        # ✅ ONLY YOUR BRANDING
+        # ✅ YOUR BRANDING ONLY
         data["developer"] = "@Urslash"
         data["powered_by"] = "urslash-number-api"
 
