@@ -5,7 +5,7 @@ import time
 app = Flask(__name__)
 
 # ==================== CONFIG =====================
-YOUR_API_KEYS = ["GOKU"]
+YOUR_API_KEYS = ["SLASH"]
 TARGET_API = "https://ravan-lookup.vercel.app/api"
 UPSTREAM_KEY = "Ravan"   # upstream api key
 CACHE_TIME = 3600  # seconds
