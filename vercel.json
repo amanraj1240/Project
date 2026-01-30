@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/number.js": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/number.js"
+    }
+  ]
+}
